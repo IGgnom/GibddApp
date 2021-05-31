@@ -1,0 +1,201 @@
+﻿<Window x:Class="GibddApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GibddApp"
+        mc:Ignorable="d"
+        Title="Инормационная система Штрафы ГИБДД"
+        Height="605" 
+        Width="1170"
+        MinHeight="605" 
+        MinWidth="1170"
+        MaxHeight="605" 
+        MaxWidth="1170"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Поиск штрафов"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10,10,10,15"
+                   FontSize="28"
+                   FontWeight="DemiBold"
+                   Grid.Column="0">
+        </TextBlock>
+        <TextBox x:Name="serchTextBox"
+                 Grid.Column="3"
+                 Grid.Row="0"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Width="220"
+                 Height="25"
+                 FontSize="15"
+                 Margin="0,0,0,0">
+        </TextBox>
+        <Button x:Name="searchButton"
+                Grid.Column="3"
+                Grid.Row="0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Height="25"
+                Width="60"
+                Margin="0,0,5,0"
+                Content="Поиск"
+                FontSize="15"
+                Click="SearchButtonClick">
+        </Button>
+        <ListView x:Name="penaltyListView"
+                  Margin="10,10,50,0"
+                  Grid.Row="1"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="3"
+                  Grid.RowSpan="2">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" 
+                            Value="Left">
+                    </Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header=" VIN" 
+                                    Width="150" 
+                                    DisplayMemberBinding="{Binding VIN}">
+                    </GridViewColumn>
+                    <GridViewColumn Header=" Номер автомобиля" 
+                                    Width="220" 
+                                    DisplayMemberBinding="{Binding CarNumber}">
+                    </GridViewColumn>
+                    <GridViewColumn Header=" Регион" 
+                                    Width="220" 
+                                    DisplayMemberBinding="{Binding CarNumber}">
+                    </GridViewColumn>
+                    <GridViewColumn Header=" Дата и время оформления" 
+                                    Width="217" 
+                                    DisplayMemberBinding="{Binding CarNumber}">
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Text="Фото:"
+                   Grid.Column="3"
+                   Grid.Row="1"
+                   Margin="-40,7,0,0"
+                   FontSize="15"
+                   FontWeight="DemiBold">
+        </TextBlock>
+        <Border BorderBrush="SlateGray"
+                Background="LightGray"
+                BorderThickness="1"
+                Margin="-40,30,10,250"
+                Grid.Column="3"
+                Grid.Row="1"
+                Grid.RowSpan="2">
+            <Image x:Name="penaltyImage">
+            </Image>
+        </Border>
+        <TextBlock Text="Адрес нарушения:"
+                   Grid.Column="3"
+                   Grid.Row="2"
+                   Margin="-40,145,0,0"
+                   FontSize="15"
+                   FontWeight="DemiBold">
+        </TextBlock>
+        <RichTextBox x:Name="addressRichTextBox"
+                     Grid.Column="3"
+                     Grid.Row="2"
+                     Margin="-40,170,10,0"
+                     Height="50"
+                     VerticalAlignment="Top">
+        </RichTextBox>
+        <TextBlock Text="Подразделение ГИБДД:"
+                   Grid.Column="3"
+                   Grid.Row="2"
+                   Margin="-40,225,0,0"
+                   FontSize="15"
+                   FontWeight="DemiBold">
+        </TextBlock>
+        <RichTextBox x:Name="departmentRichTextBox"
+                     Grid.Column="3"
+                     Grid.Row="2"
+                     Margin="-40,250,10,0"
+                     Height="50"
+                     VerticalAlignment="Top">
+        </RichTextBox>
+        <TextBlock Text="Описание нарушения:"
+                   Grid.Column="3"
+                   Grid.Row="2"
+                   Margin="-40,305,0,0"
+                   FontSize="15"
+                   FontWeight="DemiBold">
+        </TextBlock>
+        <RichTextBox x:Name="descriptionRichTextBox"
+                     Grid.Column="3"
+                     Grid.Row="2"
+                     Margin="-40,330,10,0"
+                     Height="50"
+                     VerticalAlignment="Top">
+        </RichTextBox>
+        <Button x:Name="payPenaltyButton"
+                Grid.Column="3"
+                Grid.Row="3"
+                Margin="-40,10,10,10"
+                Content="Погасить выбранный штраф"
+                FontSize="15"
+                FontWeight="DemiBold"
+                Click="PayPenaltyButtonClick">
+        </Button>
+        <Button x:Name="addPenaltyButton"
+                Grid.Column="0"
+                Grid.Row="3"
+                Margin="10,10,10,10"
+                Content="Новый штраф"
+                FontSize="15"
+                FontWeight="DemiBold"
+                Click="AddPenaltyButtonClick">
+        </Button>
+        <Button x:Name="editPenaltyButton"
+                Grid.Column="1"
+                Grid.Row="3"
+                Margin="10,10,10,10"
+                Content="Изменить выбранный штраф"
+                FontSize="15"
+                FontWeight="DemiBold"
+                Click="EditPenaltyButtonClick">
+        </Button>
+        <TextBlock x:Name="totalPenaltyTextBox"
+                   Text="Общая сумма штрафов: 0 руб."
+                   Grid.Column="2"
+                   Grid.Row="3"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Margin="0,5,55,0"
+                   FontWeight="DemiBold">
+        </TextBlock>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,50,0">
+            <TextBlock Text="Фильтрация:"
+                       Margin="0,0,0,5"
+                       FontWeight="DemiBold"></TextBlock>
+            <CheckBox x:Name="checkBox2" IsChecked="True" Height="20" Content="Активные" />
+            <CheckBox x:Name="checkBox1" IsChecked="False" Height="20" Content="Погашенные"/>
+        </StackPanel>
+    </Grid>
+</Window>
